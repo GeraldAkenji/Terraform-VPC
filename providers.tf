@@ -1,12 +1,13 @@
 terraform {
   required_providers {
-    aci = {
-      source  = "ciscodevnet/aci"
-      version = "~> 0.2" # or the version you want
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~>3.0"
     }
   }
 }
 
-provider "aci" {
-  # Your provider config here
+provider "aws" {
+  # Configuration options
+  region = "us-west-2"
 }
