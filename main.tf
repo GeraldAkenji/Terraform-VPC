@@ -69,3 +69,23 @@ resource "aws_security_group" "webSg" {
     Name = "Web-sg"
   }
 }
+
+resource "aws_s3_bucket" "example" {
+  bucket = "gerald-akenji-001"
+}
+
+resource "aws_instance" "webserver1" {
+    ami = "ami-075686beab831bb7f"
+    instance_type = "t3.large"
+    vpc_security_group_ids = [aws_security_group.webSg.id] 
+    subnet_id = aws_subnet.sub1.id
+    user_data = base64encode(file("userdata.sh"))
+}
+
+resource "aws_instance" "webserver2" {
+    ami = "ami-075686beab831bb7f"
+    instance_type = "t3.large"
+    vpc_security_group_ids = [aws_security_group.webSg.id] 
+    subnet_id = aws_subnet.sub2.id
+    user_data = base64encode(file("userdata1.sh"))
+}
